@@ -1,3 +1,17 @@
+"""
+Text Generation Script for Predictive Coding Transformer
+
+This script generates text using a trained predictive coding transformer model.
+
+Usage:
+    python generate_text.py
+
+Flags:
+    (No command-line flags are currently supported.)
+
+For distributed generation, use torchrun:
+    torchrun --nproc-per-node=<NUM_GPUS> generate_text.py
+"""
 import torch
 import os
 from predictive_coding.config import GPTConfig
@@ -6,12 +20,6 @@ import torch.nn.functional as F
 from Data_preprocessing.dataloader import get_loaders
 from torch.nn.parallel import DistributedDataParallel as DDP
 import torch.distributed as dist
-"""
-Usage: python generate_text.py
-
-This script generates text using a trained predictive coding transformer model.
-It takes a prompt, generates new tokens, and prints the prompt, target, and generated text.
-"""
 
 def get_device_and_rank():
     if torch.cuda.is_available():

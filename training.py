@@ -1,3 +1,20 @@
+"""
+Training Script for Predictive Coding Transformer
+
+This script trains a predictive coding transformer model on a specified dataset.
+
+Usage:
+    python training.py [--dataset DATASET]
+
+Flags:
+    --dataset DATASET    Dataset to use: 'ptb' (Penn Treebank) or 'opwb' (OpenWebText) (default: 'opwb')
+
+Example:
+    python training.py --dataset ptb
+
+For distributed training, use torchrun:
+    torchrun --nproc-per-node=<NUM_GPUS> training.py --dataset ptb
+"""
 import os
 import torch
 import torch.nn as nn
@@ -15,12 +32,6 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 import argparse
 from utils.device_utils import setup_ddp
 
-"""
-Usage: python training.py
-
-This script trains a predictive coding transformer model on a dataset.
-It tracks and plots the average predictive coding energy per epoch and saves the trained model.
-"""
 
 def train(model, dataloader, tokenizer, config, global_step, device):
     model.train()

@@ -1,5 +1,17 @@
 """
 Bayesian Hyperparameter Tuning
+
+This script performs Bayesian hyperparameter tuning for the Predictive Coding Transformer model using Optuna.
+
+Usage:
+    python tuning/bayes_tuning.py [--flash] [--dataset DATASET]
+
+Flags:
+    --flash, --flash_attention   Enable FlashAttention for attention layers (default: False)
+    --dataset DATASET            Dataset to use: 'ptb' (Penn Treebank) or 'opwb' (OpenWebText) (default: 'opwb')
+
+Example:
+    python tuning/bayes_tuning.py --flash --dataset ptb
 """
 import torch
 import logging
